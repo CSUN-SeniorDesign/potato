@@ -43,18 +43,19 @@ gsettings set org.gnome.desktop.screensaver lock-enabled false
 3. Run ```sudo apt-get -y install apache2```
 4. Set the firewall to allow incoming connections on ports 80 and 443 by running the command ```sudo ufw allow in "Apache Full"```
 
-    4a. Test that the firewall rule is working after finding out the IP Address of the server by running
+    4a. Run ``` sudo apt-get install net-tools ```
+    4b. Test that the firewall rule is working after finding out the IP Address of the server by running
     ```
-    ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+    ip addr show
     ```
-    4b. An alternative is to install curl and run this command:
+    4c. An alternative is to install curl and run this command:
     ```
     sudo apt install curl
     curl http://icanhazip.com
     ```
 
 #### Installing MySQL
-1. Run ``` sudo apt install mysql-server ```
+1. Run ``` sudo apt install -y mysql-server ```
 2. Run ``` sudo mysql_secure_installation ```
 3. Press ```y``` for all the questions.
 4. Open the MySQL command prompt by running ```sudo mysql```
@@ -63,8 +64,8 @@ gsettings set org.gnome.desktop.screensaver lock-enabled false
 7. Finally, exit the MySQL command prompt ```exit```
 
 ### Installing PHP
-1. Run ```sudo apt install php libapache2-mod-php php-mysql```
-2. Modify apache configuration to prefer .php files over .html files ```sudo nano /etc/apache2/mods-enabled/dir.conf```
+1. Run ```sudo apt install -y php libapache2-mod-php php-mysql```
+2. Modify apache configuration to prefer .php files over .html files ```sudo nano -c  /etc/apache2/mods-enabled/dir.conf```
 3. Make the config file look like this:
 ```
 <IfModule mod_dir.c>
@@ -73,7 +74,7 @@ gsettings set org.gnome.desktop.screensaver lock-enabled false
 ```
 4. Press ```CTRL + X``` then ```y``` then ```ENTER``` in order to save the changes to the configuration file.
 5. Restart the service to implement the changes: ```sudo systemctl restart apache2```
-6. Test that the php install is working by running ``` sudo nano /var/www/html/info.php ```
+6. Test that the php install is working by running ``` sudo nano -c /var/www/html/info.php ```
 7. Inside that file type
 ```
 <?php
@@ -84,7 +85,7 @@ phpinfo();
 9. Remove the file after testing. ``` sudo rm /var/www/html/info.php ```
 
 ### Installing phpMyAdmin
-1. Run ```sudo apt install phpmyadmin php-mbstring php-gettext```
+1. Run ```sudo apt install -y phpmyadmin php-mbstring php-gettext```
 2. Press ```SPACE``` then ```TAB``` then ```ENTER``` to select apache2.
 3. Give a password for phpMyAdmin.
 4. Run ```sudo phpenmod mbstring```
@@ -97,7 +98,7 @@ phpinfo();
 ```
 sudo apt-get autoremove
 ```
-11. Secure your phpMyAdmin by going into the apache config files ```sudo nano /etc/apache2/conf-available/phpmyadmin.conf```
+11. Secure your phpMyAdmin by going into the apache config files ```sudo nano -c  /etc/apache2/conf-available/phpmyadmin.conf```
 12. Add ``` AllowOverride All ``` to
 ```
 <Directory /usr/share/phpmyadmin>
@@ -106,7 +107,7 @@ sudo apt-get autoremove
     AllowOverride All
 ```
 13. Save the changes and restart apache to apply those changes: ```sudo systemctl restart apache2```
-14. Run ```sudo nano /usr/share/phpmyadmin/.htaccess``` to create a .htaccess for phpmyadmin.
+14. Run ```sudo nano -c  /usr/share/phpmyadmin/.htaccess``` to create a .htaccess for phpmyadmin.
 15. Inside that new file write
 ```
 AuthType Basic
@@ -114,6 +115,6 @@ AuthName "Restricted Files"
 AuthUserFile /etc/phpmyadmin/.htpasswd
 Require valid-user
 ```
-16. Add a user to the .htaccess ```sudo htpasswd -c /etc/phpmyadmin/.htpasswd username```
+16. Add a user to the .htaccess ```sudo htpasswd -c /etc/phpmyadmin/.htpasswd software-irrigation```
 17. Add more users by running this command ```sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser```
-18. Test that .htaccess is working by visiting the server's IP address /phpmyadmin 
+18. Test that .htaccess is working by visiting the server's IP address /phpmyadmin

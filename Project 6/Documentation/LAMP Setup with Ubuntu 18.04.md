@@ -39,7 +39,7 @@ gsettings set org.gnome.desktop.screensaver lock-enabled false
 ### Installing a LAMP stack
 #### Installing Apache
 1. Once logged into the machine, open up a terminal.
-2. Run ```sudo apt-get update``` in order to update the repository listings.
+2. Run ```sudo apt-get update -y``` in order to update the repository listings.
 3. Run ```sudo apt-get -y install apache2```
 4. Set the firewall to allow incoming connections on ports 80 and 443 by running the command ```sudo ufw allow in "Apache Full"```
 

@@ -1,5 +1,5 @@
-***Copy over the files to the remote machine that need writing to and just move the file to the correct location***
-### Script to install set up ssh connection (ON Remote Machine)
+***Copy over the files to the remote machine that need writing to and just move the file to the correct location.***
+### Script to install set up ssh connection (ON Remote Machine) ***prepareremote.sh***
 ```
 #!/bin/bash
 # ---------------------------------------
@@ -24,9 +24,9 @@ sudo apt install -y net-tools curl ssh ufw python
 sudo ufw enable && \
 sudo ufw default deny incoming && \
 sudo ufw default allow outgoing && \
-sudo ufw allow http && \
-sudo ufw allow https && \
-sudo ufw allow ssh
+sudo ufw allow 80 && \
+sudo ufw allow 443 && \
+sudo ufw allow 22
 # ---------------------------------------
 # Setting firewall rules finished.
 # ---------------------------------------
@@ -39,7 +39,7 @@ ifconfig | grep "inet"
 # ---------------------------------------
 ```
 
-### Script to install ansible (ON Master Machine)
+### Script to install ansible (ON Master Machine) ***ansiblemaster.sh***
 ```
 #!/bin/bash
 # ---------------------------------------
@@ -65,7 +65,7 @@ sudo apt install -y python ansible
 # Send ssh key to remote machine(s) starting.
 # ---------------------------------------
 ssh-keygen -t rsa -N "" -f id_rsa
-ssh-copy-id -i ~/.ssh/id_rsa software-irrigation@192.168.64.128
+yes | ssh-copy-id software-irrigation@192.168.64.128
 # ---------------------------------------
 # Send ssh key to remote machine(s) finished.
 # ---------------------------------------
@@ -73,15 +73,15 @@ ssh-copy-id -i ~/.ssh/id_rsa software-irrigation@192.168.64.128
 # Configuring ansible starting.
 # ---------------------------------------
 sudo mkdir /etc/ansible/group_vars
-cp hosts /etc/ansible/
-cp webservers /etc/ansible/group_vars/
+yes | sudo cp hosts /etc/ansible/
+yes | sudo cp webservers /etc/ansible/group_vars/
 # ---------------------------------------
 # Configuring ansible finished.
 # ---------------------------------------
 ansible -m ping webservers
 ```
 
-### Script to download and install LAMP Stack and Laravel (ON Remote Machine)
+### Script to download and install LAMP Stack and Laravel (ON Remote Machine) ***lampremote.sh***
 ```
 #!/bin/bash
 # ---------------------------------------
@@ -108,15 +108,14 @@ sudo mysql -e "FLUSH PRIVILEGES"
 # ---------------------------------------
 # Configuring php priority and phpmyadmin starting.
 # ---------------------------------------
-cp dir.conf /etc/apache2/mods-enabled/
-cp phpmyadmin.conf /etc/apache2/conf-available/phpmyadmin.conf
-cp .htacess /usr/share/phpmyadmin/
+yes | sudo cp dir.conf /etc/apache2/mods-enabled/
+yes | sudo cp phpmyadmin.conf /etc/apache2/conf-available/
+yes | sudo cp .htacess /usr/share/phpmyadmin/
 sudo phpenmod mbstring
 sudo systemctl restart apache2
 sudo mysql -e "CREATE USER 'software-irrigation'@'localhost' IDENTIFIED BY 'password';"
 sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'software-irrigation'@'localhost' WITH GRANT OPTION;"
 echo "password" | sudo htpasswd -i -c /etc/phpmyadmin/.htpasswd software-irrigation
-
 # ---------------------------------------
 # Configuring php priority and phpmyadmin finished.
 # ---------------------------------------

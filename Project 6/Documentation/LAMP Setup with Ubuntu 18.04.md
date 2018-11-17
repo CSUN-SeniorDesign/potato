@@ -118,3 +118,28 @@ Require valid-user
 16. Add a user to the .htaccess ```sudo htpasswd -c /etc/phpmyadmin/.htpasswd software-irrigation```
 17. Add more users by running this command ```sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser```
 18. Test that .htaccess is working by visiting the server's IP address /phpmyadmin
+
+### Installing Laravel
+1. Add the Laravel repo ```sudo add-apt-repository ppa:ondrej/php```
+2. Update the repo list ```sudo apt-get update```
+3. Downloading PHP from the repo
+```
+sudo apt-get install apache2 libapache2-mod-php7.2 php7.2 php7.2-xml php7.2-gd php7.2-opcache php7.2-mbstring
+```
+4. Installing laravel
+```
+cd /tmp && \
+curl -sS https://getcomposer.org/installer | php && \
+sudo mv composer.phar /usr/local/bin/composer
+```
+5. Create a new project in your apache2 hosting directory. Replace "your-project" with the name of the project you want to create/host.
+```
+cd /var/www/html
+sudo composer create-project laravel/laravel your-project --prefer-dist
+```
+
+6. Set the proper permissions on the project:
+```
+sudo chgrp -R www-data /var/www/html/your-project && \
+sudo chmod -R 775 /var/www/html/your-project/storage
+```

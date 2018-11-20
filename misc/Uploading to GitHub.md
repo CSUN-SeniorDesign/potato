@@ -133,3 +133,56 @@ Note: This only needs to be done once.
   ![Git Bash 16](../markdown-images/git-guide/16.png)
 
 ### Section 3: Updating the repository
+Ideally, you'll want to save your work to GitHub once the day is over or you've finished working on it for that day.
+
+tl;dr: Right click in the repository directory whitespace, open ```Git GUI Here```, press rescan, press ```Stage Changed```, Add a ```Commit Message```, create a new ```Branch```, press ```Commit```, press ```push```, open a brower to the github page, press ```Compare and pull request```, have team member check and accept the pull request.   
+
+1. Open up the folder containing the GitHub repository.
+
+![Git Bash 16](../markdown-images/git-guide/16.png)
+
+2. Right click and select ```Git GUI Here```
+
+![Git Bash 14](../markdown-images/git-guide/14.png)
+
+3. Once the GUI opens, press ```Rescan``` so that the program checks for any changes to the files inside the directory.
+
+![Git Bash 19](../markdown-images/git-guide/19.png)
+
+4. Then click on ```Stage Changed```. This will add the changed files to the tracker that git uses to check for any changes to the files inside the directory.
+
+![Git Bash 20](../markdown-images/git-guide/20.png)
+
+5. If you get this message, just click ```Continue```
+
+![Git Bash 21](../markdown-images/git-guide/21.png)
+
+6. In the ```Commit Message``` box, the first line should be a summary of all the changes you are making to the repository. Then leave a blank line below the summary and add a detailed account of what was changed. The more specific the better.
+
+![Git Bash 22](../markdown-images/git-guide/22.png)
+
+7. Never commit your changes to the master branch. Always create a new branch to push to first.
+
+![Git Bash 23](../markdown-images/git-guide/23.png)
+
+8. Name the branch something descriptive.
+
+![Git Bash 24](../markdown-images/git-guide/24.png)
+
+9. After the branch has been created, it'll return you to the main GUI. From there press ```push```. Select the newly created branch.
+
+![Git Bash 25](../markdown-images/git-guide/25.png)
+
+10. Visit the GitHub repository on your browser. Click the ```format-change Compare & pull request``` option below the blue line.
+
+![Git Bash 26](../markdown-images/git-guide/26.png)
+
+11. Write any necessary comments for your team members such as "please check [this specific part of my code] please."
+
+![Git Bash 27](../markdown-images/git-guide/27.png)
+
+12. Have one of your team members check over the changes made to the project. Once the check is complete, press ```Merge pull request```. The repository will be updated with the changes you've committed to it.
+
+![Git Bash 28](../markdown-images/git-guide/28.png)
+
+Explanation: Committing to the repository is done in this way so that you have a log of all your contributions to the team project. It also gives an opportunity for your team to check your work and for you to have some peer review.

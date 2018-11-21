@@ -126,6 +126,7 @@ cd /tmp && curl -sS https://getcomposer.org/installer | php && \
 sudo mv composer.phar /usr/local/bin/composer
 cd /var/www/html && \
 sudo composer create-project laravel/laravel software-irrigation --prefer-dist
+cd /home/software-irrigation/Desktop && git clone https://github.com/CSUN-Irrigation/software-irrigation
 sudo chgrp -R www-data /var/www/html/software-irrigation
 sudo chmod -R 775 /var/www/html/software-irrigation/storage
 # ---------------------------------------
@@ -135,4 +136,10 @@ sudo a2dissite 000-default.conf && \
 sudo a2ensite laravel.conf && \
 sudo a2enmod rewrite && \
 sudo service apache2 restart
+```
+
+```
+Need to create a database called irrigation.
+Need to copy the .env file from packaged-automation to the project directory.
+Need to cd into the project directory and run php artisan migrate
 ```

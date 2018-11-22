@@ -21,8 +21,8 @@ sudo apt install -y python ansible
 # ---------------------------------------
 # Send ssh key to remote machine(s) starting.
 # ---------------------------------------
-ssh-keygen -t rsa -N "" -f id_rsa
-yes | ssh-copy-id software-irrigation@192.168.64.134
+cd /home/software-irrigation/Desktop/ && ssh-keygen -t rsa -N "" -f id_rsa
+# yes | ssh-copy-id software-irrigation@192.168.64.134
 # ---------------------------------------
 # Send ssh key to remote machine(s) finished.
 # ---------------------------------------
@@ -35,4 +35,4 @@ yes | sudo cp webservers /etc/ansible/group_vars/
 # ---------------------------------------
 # Configuring ansible finished.
 # ---------------------------------------
-ansible -m ping webservers
+# ansible -m ping webservers

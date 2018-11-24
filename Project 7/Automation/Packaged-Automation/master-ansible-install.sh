@@ -28,7 +28,8 @@
 # Send ssh key to remote machine(s) starting.
 # ---------------------------------------
       # Create the SSH key non-interactively.
-      cd /home/master/Desktop/.ssh && ssh-keygen -t rsa -N "" -f id_rsa
+      mkdir /home/master/Desktop/.ssh
+      ssh-keygen -t rsa -N "" -f /home/master/Desktop/.ssh/id_rsa
       # Find the IP Addresses of the hosts and add the SSH key to them.
       # yes | ssh-copy-id software-irrigation@192.168.64.134
 # ---------------------------------------

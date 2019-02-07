@@ -77,4 +77,4 @@
 5. In the Display tab, select High Color 16 bit.
 6. In the Experience tab, select LAN and uncheck all the checkboxes.
 7. Select connect.
-8. When prompted for a login, select Xvnc as the session and ubuntu as the username. Input the password that was created in the ```Setting up GUI Desktop for Ubuntu 18.04 on AWS Instance``` tutorial. 
+8. When prompted for a login, select Xvnc as the session and ubuntu as the username. Input the password that was created in the ```Setting up GUI Desktop for Ubuntu 18.04 on AWS Instance``` tutorial.

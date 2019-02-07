@@ -32,40 +32,28 @@
   ```
   sudo apt update -y && sudo apt upgrade -y
   ```
-2. Enable password authentication.
+
+2. Enable password authentication and restart SSH.
   ```
-  sudo sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-  ```
-3. Restart SSH.
-  ```
+  sudo sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
   sudo /etc/init.d/ssh restart
   ```
-4. Give a password to the ubuntu account.
+
+3. Give a password to the ubuntu account.
   ```
   sudo passwd ubuntu
   ```
-5. Install certain programs.
+
+4. Install certain programs.
   ```
-  sudo apt install xrdp xfce4 xfce4-goodies tightvncserver -y
+  sudo apt install xrdp xfce4 xfce4-goodies tightvncserver firefox -y
   ```
 
-6. Update settings.
+5. Update settings and restart the xrdp service
   ```
-  echo xfce4-session > /home/ubuntu/.xsession
-  ```
-
-7. Update settings.
-  ```
-  sudo cp /home/ubuntu/.xsession /etc/skel
-  ```
-
-8. Update settings.
-  ```
-  sudo sed -i '0,/-1/s//ask-1/' /etc/xrdp/xrdp.ini
-  ```
-
-9. Restart the xrdp service
-  ```
+  echo xfce4-session > /home/ubuntu/.xsession && \
+  sudo cp /home/ubuntu/.xsession /etc/skel && \
+  sudo sed -i '0,/-1/s//ask-1/' /etc/xrdp/xrdp.ini && \
   sudo service xrdp restart
   ```
 

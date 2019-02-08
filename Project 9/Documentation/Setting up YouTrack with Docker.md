@@ -1,4 +1,6 @@
 ## Setting up YouTrack with Docker
+**This method requires at least 4GB of memory.**
+
 1. Install Docker
 2. Run this command:
   ```

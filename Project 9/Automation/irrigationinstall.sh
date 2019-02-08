@@ -49,7 +49,7 @@
       sudo cp -R .htaccess /usr/share/phpmyadmin/
     # Change the group and access to the owner of the machine.
       sudo chgrp -R www-data /var/www/html/software-irrigation
-      sudo chmod -R 775 /var/www/html/software-irrigation/storage
+      sudo chmod -R 775 /var/www/html/software-irrigation/
     # Move into the project folder and run the php command to create the database.
     # The database is set up based on the information provided in the .env file.
       cd /var/www/html/software-irrigation && php artisan migrate

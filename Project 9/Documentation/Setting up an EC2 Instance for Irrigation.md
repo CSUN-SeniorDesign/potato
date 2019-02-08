@@ -38,3 +38,41 @@
   ```
   sudo cp -R /home/ubuntu/software-irrigation /var/www/html/software-irrigation
   ```
+
+7. Use git to clone the potato repo.
+
+  ```
+  cd ~/ && git clone https://github.com/CSUN-SeniorDesign/potato
+  ```
+
+8. Move into Project 9 Automation folder and move the files to their required locations.
+
+  ```
+  cd potato/'Project 9'/Automation
+  ```
+
+9. Move the laravel.conf file to the sites-avilable folder.
+
+  ```
+  sudo cp -R laravel.conf /etc/apache2/sites-available/
+  ```
+
+10. Move the .env file to the laravel project folder.
+
+  ```
+  sudo cp -R .env /var/www/html/software-irrigation/
+  ```
+
+11. Move the dir.conf file to the mods-enabled folder.
+
+  ```
+  sudo cp -R dir.conf /etc/apache2/mods-enabled/
+  ```
+
+12. Move the phpmyadmin.conf file to the conf-available folder.
+
+  ```
+  sudo cp -R phpmyadmin.conf /etc/apache2/conf-available/
+  ```
+
+13.

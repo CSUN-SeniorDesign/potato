@@ -27,3 +27,10 @@ sudo apt-get install gitlab-ce
 ###### After installing you might have to adjust your firewall settings to allow SSH traffic and HTTP access. You will need to open up the ports to allow SSH and HTTP.
 
 4. Modifying the Gitlab configuration file as needed. You can link the Gitlab server to a domain name or an IP address.
+```
+sudo nano /etc/gitlab/gitlab.rb
+```
+After you finish you will need to run the next command to reconfigure the Gitlab:
+```
+sudo gitlab-ctl reconfigure
+```

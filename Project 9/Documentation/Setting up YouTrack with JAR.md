@@ -44,6 +44,18 @@ https://www.jetbrains.com/help/youtrack/standalone/youtrack-jar.html
   WantedBy=default.target
   ```
 
+  **UPDATED ON 2/15/18**
+
+  **THE ABOVE ABOUT THE EXECSTART LINE HAS TO BE CHANGED ONCE TLS IS SETUP. DO THIS INSTEAD:**
+
+  ```
+  change :
+  ExecStart=/usr/bin/java -jar /home/youtrack/youtrack.jar --J-Xmx1G 8080
+
+  to:
+  ExecStart=/usr/bin/java -jar /home/youtrack/youtrack.jar --J-Xmx1G 8443
+  ```
+
 6. Run these commands:
   ```
   sudo systemctl daemon-reload && \

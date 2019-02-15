@@ -16,6 +16,24 @@ https://www.jetbrains.com/help/youtrack/standalone/tls-keystores-and-certificate
   https://<FQDN of your server>:<port>/
   https://13.58.141.53:8443/
   ```
+  **UPDATED ON 2/15/18**
+
+  **THE ABOVE ABOUT FQDN WITH AN IP ADDRESS DOES NOT WORK. DO THIS INSTEAD:**
+
+  ```
+  sudo nano /etc/hostname
+
+  change hostname to the base url you want for example:
+  youtrack.irrigationproject.xyz
+
+  sudo nano /etc/hosts
+  127.0.0.1 youtrack.irrigationproject.xyz
+
+  reboot the instance.
+
+  Use the FQDN of your server i.e. the hostname for the CN:
+  youtrack.irrigationproject.xyz
+  ```
 
 3. Create a file called v3.ext
   ```
@@ -64,6 +82,6 @@ https://www.jetbrains.com/help/youtrack/standalone/tls-keystores-and-certificate
 
 7.  Run these commands:
   ```
-  sudo chmod 700 YouTrack_Server_TLS.pem
+  sudo chmod 700 YouTrack_Server_TLS.pem && \
   sudo chmod 700 YouTrack_Server_TLS_cert.pem
   ```

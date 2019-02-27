@@ -56,51 +56,81 @@ The SSH connection stays alive for 120 seconds x 720 intervals = 86400 seconds =
   ```
 
 2. Install Apache2.
-```sudo apt-get install apache2 - y```
+```
+sudo apt-get install apache2 - y
+```
 
 3. Install mySQL server.
-```sudo apt-get install mysql-server -y```
+```
+sudo apt-get install mysql-server -y
+```
 
 4. Install php.
-```sudo apt-get install php libapache2-mod-php php-mysql -y```
+```
+sudo apt-get install php libapache2-mod-php php-mysql -y
+```
 
 5. Install phpMyAdmin.
-```sudo apt-get install phpmyadmin php-mbstring php-gettext -y```
+```
+sudo apt-get install phpmyadmin php-mbstring php-gettext -y
+```
 
 6. Install npm.
-```sudo apt-get install npm -y```
+```
+sudo apt-get install npm -y
+```
 
 7. Install Angular-CLI.
-```sudo npm install -g @angular/cli```
+```
+sudo npm install -g @angular/cli
+```
 
 8. Install composer.
-```sudo apt-get install composer -y```
+```
+sudo apt-get install composer -y
+```
 
 ## Configuring required programs
 1. Make apache2 start when the server does.
-```sudo systemctl enable apache2```
+```
+sudo systemctl enable apache2
+```
 
 2. Start apache2 right now.
-```sudo systemctl start apache2```
+```
+sudo systemctl start apache2
+```
 
 3. Restart SSH.
-```sudo systemctl restart ssh```
+```
+sudo systemctl restart ssh
+```
 
 4. Configure mySQL.
-```sudo mysql_secure_installation```
+```
+sudo mysql_secure_installation
+```
 
 ## Using required programs
 1. Login to mySQL.
-```sudo mysql```
+```
+sudo mysql
+```
 
 2. Create a new user.
-```CREATE USER 'software-irrigation'@'localhost' IDENTIFIED BY 'grouppotato';```
+```
+CREATE USER 'software-irrigation'@'localhost' IDENTIFIED BY 'grouppotato';
+```
 
 3. Give the user all the privileges that root has.
-```GRANT ALL PRIVILEGES ON * . * TO 'software-irrigation'@'localhost';```
+```
+GRANT ALL PRIVILEGES ON * . * TO 'software-irrigation'@'localhost';
+```
 
 4. Update the permissions.
-```FLUSH PRIVILEGES;```
+```
+FLUSH PRIVILEGES;
+```
 
 5. Login to phpMyAdmin then create a database called "irrigation".
 
@@ -168,3 +198,15 @@ sudo nano /usr/share/phpmyadmin/libraries/sql.lib.php
   ```
   ng serve --host=0.0.0.0 &
   ```
+
+## MISC
+
+1. Finding what is running on a specific port
+```
+lsof -i TCP:80 | grep LISTEN
+```
+
+2. Find all matches in the current directory.
+```
+grep -nr "localhost:8000"
+```

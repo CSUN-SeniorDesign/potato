@@ -28,6 +28,48 @@
   gsettings set org.gnome.desktop.screensaver lock-enabled false
   ```
 
+2. Update the sshd_config file to delay ssh timeout.
+
+  ```
+    sudo nano /etc/ssh/sshd_config
+  ```
+
+  2a. Set these variables
+  ```
+    ClientAliveInterval 120
+    ClientAliveCountMax 720
+  ```
+
+3. Copying the finished MEAN Stack to another server:
+  ```
+    scp -i irrigation.pem login-portal.zip ubuntu@ec2.ip.addr:/home/ubuntu/
+  ```
+
+4. Logging into the EC2 instance
+  ```
+    ssh -i irrigation.pem ubuntu@ec2.ip.addr
+  ```
+
+5. Iptables routing:
+  ```
+  sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+
+  sudo iptables-save
+  ```
+
+6. Run as background process:
+  ```
+    sudo npm start > /home/ubuntu/log &
+  ```
+
+7. Kill background process
+  ```
+    sudo lsof -i :3000
+    sudo kill -15 "pid"
+  ```
+
+8. Make sure to update cloudflare dns to point to the new EC2 Instance.
+
 ## Installing and setting up the MEAN Stack
 1. Update the repo and packages installed.
   ```

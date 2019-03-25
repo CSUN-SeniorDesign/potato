@@ -1,3 +1,11 @@
+# IMPORTANT NOTE:
+If there is a publickey issue when trying to ```vagrant ssh``` do the following on Windows:
+1. Open Settings
+2. Go to Apps
+3. Go to Apps and Features
+4. Go to Optional Features
+5. Uninstall OpenSSH
+
 #### Installing Vagrant
 1. Go to https://www.vagrantup.com/
 2. Click the download button and select the operating system.

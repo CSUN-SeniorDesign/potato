@@ -1,0 +1,79 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Require the AWS provider plugin
+require 'vagrant-aws'
+
+# Create and configure the AWS instance(s)
+Vagrant.configure('2') do |config|
+
+  # Use dummy AWS box
+  config.vm.box = 'aws-dummy'
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+  #config.aws_credentials.profile = "default"
+
+  # Specify AWS provider configuration
+  config.vm.provider 'aws' do |aws, override|
+    aws.aws_dir = "C:/Users/h1dde/.aws"
+    #aws.aws_profile = "default"
+
+    # Read AWS authentication information from environment variables
+    aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
+    aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+
+    # Specify SSH keypair to use
+    aws.keypair_name = 'irrigation'
+
+    # Specify region, AMI ID, and security group(s)
+    aws.region = 'us-east-2'
+    aws.ami = 'ami-0c55b159cbfafe1f0'
+	  aws.instance_type = 't3.medium'
+    aws.security_groups = [ 'vagrant-demo' ]
+
+    aws.tags = {
+      'Name' => 'Vagrant-Demo',
+      'type' => 'mean'
+    }
+
+    aws.instance_ready_timeout = 30
+
+    # Specify username and private key path
+    override.ssh.username = 'ubuntu'
+    override.ssh.private_key_path = 'C:/Users/h1dde/.ssh/irrigation.pem'
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo apt-get update -y
+    sudo apt-get upgrade -y
+    sudo apt-get install -y curl git 
+    curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    git clone https://github.com/CSUN-Irrigation/MEAN-Shahid-Software-Irrigation
+    cd MEAN-Shahid-Software-Irrigation
+    sudo npm install
+    echo 'OKTA_ORG_URL="https://dev-423841.okta.com"' | sudo tee -a /etc/environment
+    echo 'OKTA_TOKEN=00ZSLP0Jm4ytPKAA-c_ZDN6WDM_dd8evc3ABs04p8S' | sudo tee -a /etc/environment
+    echo 'OKTA_CLIENT_ID=0oabr9jsqpLUEqRIy356' | sudo tee -a /etc/environment
+    echo 'OKTA_CLIENT_SECRET=hCqri2hT_GUy1i-kYbueW9gTr8sm1n0w1M-RS49H' | sudo tee -a /etc/environment
+    echo 'SECRET=aweoihngaw4g2w34908h23wt4gawaweoik' | sudo tee -a /etc/environment
+    echo 'OKTA_APPBASEURL=https://irrigationproject.xyz' | sudo tee -a /etc/environment
+    echo 'OKTA_CALLBACK_URI=https://irrigationproject.xyz/dashboard' | sudo tee -a /etc/environment
+    sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+    sudo iptables-save
+    echo '#!/bin/sh
+    cd /home/ubuntu/MEAN-Shahid-Software-Irrigation
+    sudo npm start' | sudo tee /home/ubuntu/mean-start.sh
+    sudo chmod u+x /home/ubuntu/mean-start.sh
+    echo "[Unit]
+    Description=MEAN service
+
+    [Service]
+    ExecStart=/home/ubuntu/mean-start.sh
+
+    [Install]
+    WantedBy=multi-user.target" | sudo tee /etc/systemd/system/mean.service
+    sudo systemctl start mean
+    sudo systemctl enable mean
+	echo 'MEAN app has started on an AWS EC2 instance at ip: ' && curl https://canihazip.com/s; echo 
+  SHELL
+end
